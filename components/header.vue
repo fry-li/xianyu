@@ -24,7 +24,7 @@
 export default {};
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .container {
   width: 100%;
   height: 60px;
@@ -45,12 +45,12 @@ export default {};
       padding: 0 20px;
       box-sizing:border-box;
       &:hover{
-          color: lawngreen;
-          border-bottom:5px lawngreen solid;
+          color: #387bca;
+          border-bottom:5px #387bca;
       }
   }
   .nuxt-link-exact-active{
-          background:lawngreen;
+          background:#387bca;
           color:#fff;
         &:hover{
           color:#fff;

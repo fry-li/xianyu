@@ -10,10 +10,12 @@
 <script>
 // 引入组件
 import Header from '@/components/header'
+import Footer from '@/components/footer'
 export default {
   // 注册组件
   components:{
-    Header
+    Header,
+    Footer
   }
 }
 </script>
