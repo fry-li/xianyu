@@ -55,7 +55,19 @@
 
 <script>
 export default {
-
+    data(){
+        return{
+           form:{},
+           rile:{}
+        }
+    },
+    //发送验证码
+      handleSendCaptcha(){
+         },
+         // 注册
+        handleRegSubmit(){
+           console.log(this.form)
+        }
 }
 </script>
 

@@ -15,6 +15,7 @@
       <!-- 登录 -->
       <div v-if="!$store.state.user.userInfo.token">
         <!-- <div v-if="false"> -->
+          
         <nuxt-link to="/user/login">登录/注册</nuxt-link>
       </div>
       <div v-else>
@@ -46,11 +47,12 @@ export default {
     //退出
     handleLogout() {
       this.$store.commit("user/clearUserInfo");
-
-      this.message({
+      
+      this.$message({
         type: "success",
         message: "退出成功"
       });
+      this.$router.push('/user/login')
     }
   }
 };
