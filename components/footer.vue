@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="footer-wrapper">
     <div class="footer">
       <el-row class="info-list">
         <el-col :span="6" :offset="1">

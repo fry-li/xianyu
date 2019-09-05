@@ -61,7 +61,7 @@ export default {
       ],
       searchValue: "",
       currentOption: 0
-    };
+    }
   },
   mounted() {
     this.$axios({
