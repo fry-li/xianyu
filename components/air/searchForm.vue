@@ -113,7 +113,7 @@ export default {
             return;
         }
         //根据用户请求建议城市
-        this.$axios({
+    this.$axios({
             url:'/airs/city',
             params:{
                 name:value
@@ -135,14 +135,14 @@ export default {
     handleDepartSelect(item) {
     //   console.log(item);
       // 把选中的值设置给form
-            this.form.departCity = item.value;
-            this.form.departCode = item.sort;
+            this.form.departCity = item.value
+            this.form.departCode = item.sort
     },
     // 目标城市下拉选择时触发
     handleDestSelect(item) {
         //把选中的值设置给form
-        this.form.destCity = item.value;
-        this.form.destCity = item.sort;
+        this.form.destCity = item.value
+        this.form.destCode = item.sort
     },
     // 确认选择日期时触发
     handleDate(value) {
@@ -154,7 +154,27 @@ export default {
     handleReverse() {},
     // 提交表单时触发
     handleSubmit() {
-        console.log(this.form)
+        // console.log(this.form)
+        const {departCity, destCity, departDate} = this.form;
+            // 判断输入框不能为空
+            if(!departCity){
+                this.$alert("出发城市不能为空", "提示");
+                return;
+            }
+            if(!destCity){
+                this.$alert("到达城市不能为空", "提示");
+                return;
+            }
+            if(!departDate){
+                this.$alert("出发日期不能为空", "提示");
+                return;
+            }
+            // 跳转到机票列表页 /air/flights
+            this.$router.push({
+                path: "/air/flights",
+                // url携带的参数
+                query: this.form
+            })
         
     }
   },
