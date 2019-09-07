@@ -12,6 +12,7 @@
                     :class="{active: current===index}"
                     v-for="(item,index) in ['登录','注册']"
                     :key="index"
+                    @click="handleClick(index)"
                     >{{item}}</span>
                 </el-row>
 
@@ -19,7 +20,7 @@
                 <LoginForm v-if="current == 0"/>
 
                 <!-- 注册功能组件 -->
-                <RegisterForm v-if="current == 1"/>
+                <RegisterForm v-else-if="current == 1"/>
             </div>
         </el-row>
   </div>
@@ -27,17 +28,22 @@
 
 <script>    
 import LoginForm from "@/components/user/loginForm"
-import RegisterForm from "@/components/user/RegisterForm"
+import RegisterForm from "@/components/user/registerForm"
 export default {
     data(){
       return{
-        current:1
+        current: 0
       }
     },
     components:{
       LoginForm,
       RegisterForm
     },
+    methods:{
+        handleClick(index){
+            this.current=index
+        }
+    }
 }
 </script>
 
