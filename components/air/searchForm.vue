@@ -102,6 +102,8 @@ export default {
             v.value=v.name.replace("市","");
             newData.push(v);
         })
+        this.form.departCity = newData[0].value;
+        this.form.departCode = newData[0].sort;
         cb(newData);
     })
     },
@@ -124,6 +126,8 @@ export default {
             v.value =v.name.replace("市","")
              newData.push(v);
         })
+        this.form.destCity = newData[0].value;
+        this.form.destCode = newData[0].sort;
         cb(newData);
     })
        
@@ -151,6 +155,7 @@ export default {
     // 提交表单时触发
     handleSubmit() {
         console.log(this.form)
+        
     }
   },
   mounted() {}
