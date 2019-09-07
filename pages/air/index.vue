@@ -43,7 +43,17 @@
 </template>
 
 <script>
-export default {};
+import searchForm from "@/components/air/searchForm"
+export default {
+  data(){
+    return{
+
+    }
+  },
+  components:{
+    searchForm
+  }
+};
 </script>
 
 <style scoped lang="less">
