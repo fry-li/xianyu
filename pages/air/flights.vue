@@ -1,5 +1,5 @@
 <template>
-  <div>机票列表</div>
+  <div></div>
 </template>
 
 <script>
