@@ -64,9 +64,15 @@ export default {
     methods: {
         // 每页条数切换时候触发
         handleSizeChange(){
+            
         },
         // 页码切换时候触发
-        handleCurrentChange(){
+        handleCurrentChange(val){
+            this.pageIndex = val;
+            this.dataList = this.flightsData.flights.slice(
+                (this.pageIndex-1)*this.pageSize,
+                this.pageIndex*this.pageSize
+            )
         }
     },
     mounted(){
