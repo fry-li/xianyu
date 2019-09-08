@@ -18,6 +18,17 @@
                     v-for="(item, index) in flightsData.flights"
                     :key="index"
                     :data="item"/>
+
+                <!-- 分页 -->
+                <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="pageIndex"
+                        :page-sizes="[5, 10, 15, 20]"
+                        :page-size="pageSize"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="total">
+                    </el-pagination>
                 </div>
             </div>
 
@@ -35,12 +46,25 @@ import FlightsItem from "@/components/air/flightsItem"
 export default {
     data(){
         return{
-            flightsData:{}
+            flightsData:{},
+            pageIndex:1,
+            pageSize:5,
+            total:0
+
+
         }
     },
     components:{
         FlightsListHead,
         FlightsItem
+    },
+    methods: {
+        // 每页条数切换时候触发
+        handleSizeChange(){
+        },
+        // 页码切换时候触发
+        handleCurrentChange(){
+        }
     },
     mounted(){
         this.$axios({
