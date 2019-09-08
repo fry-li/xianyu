@@ -1,6 +1,6 @@
 <template>
   <dir class="flight-item">
-       <div>
+       <div @click="isShow = !isShow">
             <!-- 显示的机票信息 -->
             <el-row type="flex" align="middle" class="flight-info">
                 <el-col :span="6">
@@ -22,22 +22,27 @@
                     </el-row>
                 </el-col>
                 <el-col :span="6" class="flight-info-right">
-                    ￥<span class="sell-price">{{data.base_price}}</span>起
+                    ￥<span class="sell-price">{{data.base_price}}   </span>起
                 </el-col>
             </el-row>
         </div>
-        <div class="flight-recommend">
+        <div class="flight-recommend" v-show="isShow">
             <!-- 隐藏的座位信息列表 -->
-            <el-row type="flex"  justify="space-between" align="middle">
+            <el-row type="flex"  justify="space-between" align="middle" >
                 <el-col :span="4">低价推荐</el-col>
                 <el-col :span="20">
                     <!-- 可能会有多个座位，需要循环显示 -->
-                    <el-row type="flex" justify="space-between" align="middle" class="flight-sell">
+                    <el-row 
+                    type="flex" 
+                    justify="space-between" 
+                    align="middle" class="flight-sell" 
+                    v-for="(item, index) in data.seat_infos" 
+                    :key="index">
                         <el-col :span="16" class="flight-sell-left">
-                            <span>经济舱</span> | 上海一诺千金航空服务有限公司
+                            <span>{{ item.name }}</span> | {{ item.supplierName }}
                         </el-col>
                         <el-col :span="5" class="price">
-                            ￥1345
+                            ￥{{item.org_settle_price}}
                         </el-col>
                         <el-col :span="3" class="choose-button">
                             <el-button 
@@ -45,7 +50,7 @@
                             size="mini">
                             选定
                             </el-button>
-                            <p>剩余：83</p>
+                            <p>剩余：{{item.discount}}</p>
                         </el-col>
                     </el-row>
                 </el-col>
@@ -57,12 +62,19 @@
 
 <script>
 export default {
+    data(){
+        return {
+            //控制列表展开
+             isShow: false
+        }
+    },
     props: {
         // 数据
         data: {
             type: Object,
             // 默认是空数组
-            default: {}
+            default: {},
+            
         }
     },
     computed:{
