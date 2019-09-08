@@ -19,6 +19,7 @@
           :fetch-suggestions="queryDepartSearch"
           placeholder="请搜索出发城市"
           @select="handleDepartSelect"
+          @blur="handleDepartSelect"
           class="el-autocomplete"
           v-model="form.departCity"
         ></el-autocomplete>
@@ -29,6 +30,7 @@
           :fetch-suggestions="queryDestSearch"
           placeholder="请搜索到达城市"
           @select="handleDestSelect"
+          @blur="handlDestBlur"
           class="el-autocomplete"
           v-model="form.destCity"
         ></el-autocomplete>
@@ -72,7 +74,9 @@ export default {
         destCity: "", //到达城市
         destCode: "", //到达城市代码
         departDate: "" //到达日期
-      }
+      },
+       departData: [], // 存储后台返回的出发城市数组
+       destData: []    // 存储后台返回的到达城市数组
     };
   },
   methods: {
@@ -81,6 +85,16 @@ export default {
         this.$alert("目前暂时不支持往返", "提示");
       }
     },
+    // 出发城市输入框失去焦点时候触发
+        handleDepartBlur(){
+            this.form.departCity = this.departData[0] ? this.departData[0].value : "";
+            this.form.departCode = this.departData[0] ? this.departData[0].sort : "";
+        },
+        // 到达城市输入框失去焦点时候触发
+        handlDestBlur(){
+            this.form.destCity = this.destData[0] ? this.destData[0].value : "";
+            this.form.destCode = this.destData[0] ? this.destData[0].sort : "";
+        },
     queryDepartSearch(value, cb) {
       if (!value) {
         //传递空数组时不会出现下拉框
@@ -102,6 +116,8 @@ export default {
         });
         this.form.departCity = newData[0].value;
         this.form.departCode = newData[0].sort;
+        // 把转换后的数组赋值给data
+        this.departData = newData;
         cb(newData);
       });
     },
@@ -125,6 +141,8 @@ export default {
         });
         this.form.destCity = newData[0].value;
         this.form.destCode = newData[0].sort;
+        // 把转换后的数组赋值给data
+                this.destData = newData;
         cb(newData);
       });
     },
