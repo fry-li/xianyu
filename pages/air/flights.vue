@@ -63,13 +63,14 @@ export default {
     },
     methods: {
         // 每页条数切换时候触发
-        handleSizeChange(){
-            
+        handleSizeChange(val){
+            this.pageSize = val;    
+            this.dataList = this.flightsData.flights.slice(0,this.pageSize)
         },
         // 页码切换时候触发
         handleCurrentChange(val){
             this.pageIndex = val;
-            this.dataList = this.flightsData.flights.slice(
+            this.dataList = this.flightsData.flights.slice( 
                 (this.pageIndex-1)*this.pageSize,
                 this.pageIndex*this.pageSize
             )
@@ -87,7 +88,7 @@ export default {
             //分页的总条数
             this.total=this.flightsData.flights.length;
             //第一页的值
-            this.dataList=this.flightsData.flights.slice(0,5);
+            this.dataList=this.flightsData.flights.slice(0,this.pageSize);
         })
     }
 }
