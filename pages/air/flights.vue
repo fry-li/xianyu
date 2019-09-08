@@ -15,7 +15,7 @@
                 <div>
                 <!-- 航班信息 -->
                <FlightsItem 
-                    v-for="(item, index) in flightsData.flights"
+                    v-for="(item, index) in dataList"
                     :key="index"
                     :data="item"/>
 
@@ -46,7 +46,10 @@ import FlightsItem from "@/components/air/flightsItem"
 export default {
     data(){
         return{
+            // 机票列表返回的总数据
             flightsData:{},
+            // 当前显示的列表数组
+            dataList:[],
             pageIndex:1,
             pageSize:5,
             total:0
@@ -72,9 +75,13 @@ export default {
             params:this.$route.query
         })
         .then(res => {
-            console.log(res)
+            // console.log(res)
             // 赋值给总数据
             this.flightsData = res.data;
+            //分页的总条数
+            this.total=this.flightsData.flights.length;
+            //第一页的值
+            this.dataList=this.flightsData.flights.slice(0,5);
         })
     }
 }
