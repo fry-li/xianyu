@@ -5,7 +5,7 @@
             <!-- 顶部过滤列表 -->
             <div class="flights-content">
                 <!-- 过滤条件 -->
-                <FlightsFilters/>
+                <FlightsFilters :data="flightsData"/>
 
                 <!-- 航班头部布局 -->
                 <FlightsListHead/>
@@ -46,14 +46,15 @@ export default {
     data(){
         return{
             // 机票列表返回的总数据
-            flightsData:{},
+            flightsData:{
+                info:{},
+                options: {}
+            },
             // 当前显示的列表数组
             dataList:[],
             pageIndex:1,
             pageSize:5,
             total:0
-
-
         }
     },
     components:{
@@ -85,6 +86,7 @@ export default {
             // console.log(res)
             // 赋值给总数据
             this.flightsData = res.data;
+            console.log(222222222,this.flightsData)
             //分页的总条数
             this.total=this.flightsData.flights.length;
             //第一页的值
