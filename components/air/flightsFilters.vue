@@ -10,7 +10,7 @@
             <el-col :span="4">
                 <el-select size="mini"  v-model="airport" placeholder="起飞机场" @change="handleAirport">
                     <el-option
-                   v-for="(item,index) in airport "
+                   v-for="(item,index) in data.options.airport "
                    :key="index"
                    :laber="item"
                    :value="item"
@@ -42,9 +42,11 @@
             <el-col :span="4">
                 <el-select size="mini"  v-model="airSize" placeholder="机型" @change="handleAirSize">
                     <el-option
-                    label="大"
-                    value="大">
-                    </el-option>
+                    v-for="(item,index) in airSizeList"
+                    :key="index"
+                    :label="item.label"
+                    :value="item.value"
+                    ></el-option>
                 </el-select>
             </el-col>
         </el-row>
@@ -81,11 +83,21 @@ export default {
     methods: {
         // 选择机场时候触发
         handleAirport(value){
-            console.log(value)  
+            // console.log(value)
+            const arr = this.data.flights.filter(v=>{
+                return v.airline_name === value;
+            }) 
+            this.$emit("setDataList",arr)
         },
         // 选择出发时间时候触发
         handleFlightTimes(value){
-            
+            this.flightsData.flights = arr  
+            //按照数学公式切换dataList的值
+            this.dataList = this.flightsData.flights.slice(
+                (this.pageIndex-1)* this.pageSize,
+                this.pageIndex*this.pageSize
+            )
+            this.total = arr.length;
         },
          // 选择航空公司时候触发
         handleCompany(value){

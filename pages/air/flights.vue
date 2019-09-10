@@ -5,7 +5,7 @@
             <!-- 顶部过滤列表 -->
             <div class="flights-content">
                 <!-- 过滤条件 -->
-                <FlightsFilters :data="flightsData"/>
+                <FlightsFilters :data="flightsData" @setDataList="setDataList"/>
 
                 <!-- 航班头部布局 -->
                 <FlightsListHead/>
@@ -31,9 +31,7 @@
             </div>
 
             <!-- 侧边栏 -->
-            <div class="aside">
-                <!-- 侧边栏组件 -->
-            </div>
+            <FlightsAside/>
         </el-row>
     </section>
 </template>
@@ -42,6 +40,7 @@
 import FlightsListHead from "@/components/air/flightsListHead.vue"
 import FlightsItem from "@/components/air/flightsItem"
 import FlightsFilters from "@/components/air/flightsFilters"
+import FlightsAside from "@/components/air/flightsAside"
 export default {
     data(){
         return{
@@ -60,9 +59,14 @@ export default {
     components:{
         FlightsListHead,
         FlightsItem,
-        FlightsFilters
+        FlightsFilters,
+        FlightsAside
     },
     methods: {
+        //传递该方法给子组件用于修改dataList
+        setDataList(arr){
+
+        },
         // 每页条数切换时候触发
         handleSizeChange(val){
             this.pageSize = val;    
