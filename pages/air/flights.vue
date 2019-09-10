@@ -65,7 +65,16 @@ export default {
     methods: {
         //传递该方法给子组件用于修改dataList
         setDataList(arr){
+            console.log(1123, arr)
+            this.flightsData.flights =arr;
 
+            //按照数学公式切换dataList的值
+            this.dataList = this.flightsData.flights.slice(
+                (this.pageIndex-1)* this.pageSize,
+                this.pageIndex * this.pageSize
+            )
+            //修改总条数
+            this.total= arr.length
         },
         // 每页条数切换时候触发
         handleSizeChange(val){

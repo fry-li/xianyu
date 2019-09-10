@@ -101,7 +101,10 @@ export default {
         },
          // 选择航空公司时候触发
         handleCompany(value){
-            
+            const arr = this.data.flights.filter(v=>{
+                return v.airline_name === value
+            })
+            this.$emit("setDataList",arr)
         },
          // 选择机型时候触发
         handleAirSize(value){
@@ -113,8 +116,6 @@ export default {
             
         },
     },
-        
-    
 }
 </script>
 
