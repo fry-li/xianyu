@@ -61,7 +61,7 @@
 <script>
 import moment from "moment";
 export default {
-  data() {
+  data() {  
     return {
       tabs: [
         { icon: "iconfont icondancheng", name: "单程" },
@@ -108,6 +108,7 @@ export default {
           name: value
         }
       }).then(res => {
+        console.log(1112,res)
         const { data } = res.data;
         const newData = [];
         data.forEach(v => {
@@ -192,6 +193,13 @@ export default {
         this.$alert("出发日期不能为空", "提示");
         return;
       }
+      //从本地拿出存储数据
+      const arr = JSON.parse(localStorage.getItem("airs"))|| []
+      //传入表格数据
+      arr.push(this.form)
+      //存入本地存储
+      localStorage.setItem("airs",JSON.stringify(arr))
+      
       // 跳转到机票列表页 /air/flights
       this.$router.push({
         path: "/air/flights",

@@ -42,7 +42,7 @@
             <el-col :span="4">
                 <el-select size="mini"  v-model="airSize" placeholder="机型" @change="handleAirSize">
                     <el-option
-                    v-for="(item,index) in airSizeList"
+                    v-for="(item,index) in airSize"
                     :key="index"
                     :label="item.label"
                     :value="item.value"
