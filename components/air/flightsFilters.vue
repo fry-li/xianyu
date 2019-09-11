@@ -42,7 +42,7 @@
             <el-col :span="4">
                 <el-select size="mini"  v-model="airSize" placeholder="机型" @change="handleAirSize">
                     <el-option
-                    v-for="(item,index) in airSize"
+                    v-for="(item,index) in Size"
                     :key="index"
                     :label="item.label"
                     :value="item.value"
@@ -72,8 +72,14 @@ export default {
             flightTimes: "",    // 出发时间
             company: "",        // 航空公司
             airSize: "",        // 机型大小
+            Size:[
+        {label:"大",value:"L"},
+        {label:"中",value:"M"},
+        {label:"小",value:"S"},
+    ],
         }
     },
+    
     props:{
         data:{
             type:Object,
@@ -85,22 +91,27 @@ export default {
         handleAirport(value){
             // console.log(value)
             const arr = this.data.flights.filter(v=>{
-                return v.airline_name === value;
+                return v.org_airport_name=== value;
             }) 
             this.$emit("setDataList",arr)
         },
         // 选择出发时间时候触发
         handleFlightTimes(value){
-            this.flightsData.flights = arr  
-            //按照数学公式切换dataList的值
-            this.dataList = this.flightsData.flights.slice(
-                (this.pageIndex-1)* this.pageSize,
-                this.pageIndex*this.pageSize
-            )
-            this.total = arr.length;
+            //数组解构并赋值
+            const [from,to] = value.split(',')
+            //过滤数据
+            const arr =this.data.flights.filter(v=>{
+                //选择航班出发的时间的小时
+                const current = v.dep_time.split(":")[0]
+                //需要满足在时间段内
+                return +current >= +from && + +current < +to
+                //      当前小时 大于 出发  并   当前小时 小于 到达时间
+            })
+            this.$emit("setDataList",arr)
         },
          // 选择航空公司时候触发
         handleCompany(value){
+            console.log(value)
             const arr = this.data.flights.filter(v=>{
                 return v.airline_name === value
             })
@@ -108,14 +119,17 @@ export default {
         },
          // 选择机型时候触发
         handleAirSize(value){
-           
+           const arr = this.data.flights.filter(v=>{
+               return v.plane_size=== value
+           })
+           this.$emit("setDataList",arr)
         },
         
         // 撤销条件时候触发
         handleFiltersCancel(){
             
         },
-    },
+    }
 }
 </script>
 
