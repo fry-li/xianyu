@@ -107,11 +107,12 @@ export default {
                 return +current >= +from && + +current < +to
                 //      当前小时 大于 出发  并   当前小时 小于 到达时间
             })
+            console.log(arr)
             this.$emit("setDataList",arr)
         },
          // 选择航空公司时候触发
         handleCompany(value){
-            console.log(value)
+            // console.log(value)
             const arr = this.data.flights.filter(v=>{
                 return v.airline_name === value
             })
@@ -127,7 +128,13 @@ export default {
         
         // 撤销条件时候触发
         handleFiltersCancel(){
-            
+            this.airport="";
+            this.flightTimes = "";
+            this.company= "";
+            this.airSize = "";
+            this.pageIndex = 1;
+            //返回数据
+            this.$emit("setDataList",this.data.flights);
         },
     }
 }
